@@ -19,9 +19,10 @@
 <body>
 <table>
     <?php
-        for($row=1;$row<=8;$row++){
+        $length = 8;
+        for($row = 1; $row <= $length; $row++){
             echo "<tr>";
-            for($col=1;$col<=8;$col++){
+            for($col = 1; $col <= $length; $col++){
                 if($col %2 == 0){
                     $bgcolor='#000';
                 }else{

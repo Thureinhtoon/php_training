@@ -46,7 +46,7 @@
     <h1>Tutorial 03 Assignment</h1>
     <form class="form" action="<?php $_SERVER["PHP_SELF"]; ?>" method="POST">
         <label for="birthday">Select Your Birthday</label>
-        <input id="date" type="text" name="birthday">
+        <input id="date" type="date" name="birthday">
         <input type="submit" name="submit" value="Caculate Your Age">
     </form>
 

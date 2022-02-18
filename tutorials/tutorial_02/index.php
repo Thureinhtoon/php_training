@@ -15,10 +15,10 @@
   <section>
 <?php
   
-  $n=6;
-  for($i=1;$i<$n;$i++) {
-    for($j=1;$j<=(2*$n)-1;$j++){
-      if($j>=$n-($i-1) && $j<=$n+($i-1)){
+  $length=6;
+  for($row = 1; $row < $length; $row++) {
+    for($column = 1;$column <= (2*$length)-1; $column++){
+      if($column >= $length-($row-1) && $column <= $length+($row-1)){
         echo "*";
       }else {
         echo "&nbsp;&nbsp;";
@@ -27,9 +27,9 @@
     echo "<br>";
   }
 
-  for($i=$n;$i>=1;$i--){
-    for($j=1;$j<=(2*$n)-1;$j++){
-      if($j>=$n-($i-1) && $j<=$n+($i-1)){
+  for($row = $length; $row >= 1; $row--){
+    for($column = 1; $column <= (2*$length)-1; $column++){
+      if($column >=$length-($row-1) && $column<=$length+($row-1)){
         echo "*";
       }else {
         echo "&nbsp;&nbsp;";
