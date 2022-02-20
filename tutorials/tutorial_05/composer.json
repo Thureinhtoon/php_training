@@ -1,0 +1,7 @@
+{
+    "name": "dell/tutorial_05",
+    "require": {
+        "phpoffice/phpspreadsheet": "^1.22",
+        "phpoffice/phpword": "^0.18.3"
+    }
+}
