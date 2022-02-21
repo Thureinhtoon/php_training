@@ -22,9 +22,13 @@ if (isset($_POST['submit'])) {
                 mkdir($folder, 0777);
             }
             $path = $folder ."/".$image_name;
-            if (count($errors) <= 1) {
+            if (count($errors) <= 1 &&  ( ($_FILES["img"]["type"] == "image/jpeg")
+            || ($_FILES["img"]["type"] == "image/png")
+            || ($_FILES["img"]["type"] == "image/jpg")) ) {
                 move_uploaded_file($temp_name, $path);
                 $success = 'Complete Uploaded!';
+            }else{
+                $errors[] = "Your input must be image!";
             }
         
     }
