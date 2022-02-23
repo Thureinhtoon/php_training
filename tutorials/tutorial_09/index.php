@@ -70,7 +70,8 @@ mysqli_close($connect);
         <div class="chart">
             <canvas id="myChart"></canvas>
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+        <!--<script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>-->
+        <script src="node_modules/chart.js/dist/chart.js"></script>
         <script src="./script.js"></script>
 
 
