@@ -4,6 +4,8 @@ use App\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Auth\ForgetPasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,3 +51,20 @@ Route::delete('/task/{id}', function ($id) {
  
     return redirect('/');
 });
+
+//Custom Authentication Route::get('/user', 'UserController@index');
+//Route::get('login', 'AuthController@index')->name('login');
+
+Route::get('login', [AuthController::class, 'index'])->name('login');
+Route::post('post-login', [AuthController::class, 'postLogin'])->name('login.post'); 
+Route::get('registration', [AuthController::class, 'registration'])->name('register');
+Route::post('post-registration', [AuthController::class, 'postRegistration'])->name('register.post'); 
+Route::get('dashboard', [AuthController::class, 'dashboard']); 
+Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+
+//Forget Password
+
+Route::get('forget-password', [ForgetPasswordController::class, 'showForgetPasswordForm'])->name('forget.password.get');
+Route::post('forget-password', [ForgetPasswordController::class, 'submitForgetPasswordForm'])->name('forget.password.post'); 
+Route::get('reset-password/{token}', [ForgetPasswordController::class, 'showResetPasswordForm'])->name('reset.password.get');
+Route::post('reset-password', [ForgetPasswordController::class, 'submitResetPasswordForm'])->name('reset.password.post');
