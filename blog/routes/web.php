@@ -3,6 +3,7 @@
 use App\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PDFController;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\ForgetPasswordController;
@@ -68,3 +69,6 @@ Route::get('forget-password', [ForgetPasswordController::class, 'showForgetPassw
 Route::post('forget-password', [ForgetPasswordController::class, 'submitForgetPasswordForm'])->name('forget.password.post'); 
 Route::get('reset-password/{token}', [ForgetPasswordController::class, 'showResetPasswordForm'])->name('reset.password.get');
 Route::post('reset-password', [ForgetPasswordController::class, 'submitResetPasswordForm'])->name('reset.password.post');
+
+//Generate PDF
+Route::get('generate-pdf',[PDFController::class,'generatePDF']);
