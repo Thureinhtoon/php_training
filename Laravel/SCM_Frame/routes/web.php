@@ -30,6 +30,7 @@ Route::post('/task', [TaskController::class,'addTask']);
  */
 Route::delete('/task/{id}', [TaskController::class,'deleteTask']);
 
+
 //Authentication
 Route::get('login', [AuthController::class, 'index'])->name('login');
 Route::post('post-login', [AuthController::class, 'postLogin'])->name('login.post'); 
