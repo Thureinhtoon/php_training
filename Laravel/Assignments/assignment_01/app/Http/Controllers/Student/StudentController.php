@@ -2,24 +2,42 @@
 
 namespace App\Http\Controllers\Student;
 
-use App\Contracts\Service\Student\StudentServiceInterface;
 use App\Major;
 use App\Student;
 use Illuminate\Http\Request;
+use App\Exports\StudentsExport;
+use App\Imports\StudentsImport;
+use App\Http\Requests\CSVRequest;
 use App\Http\Controllers\Controller;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Requests\StudentRequest;
+use App\Contracts\Service\Student\StudentServiceInterface;
 
+/**
+ * This is Student controller.
+ * This handles Student CRUD processing.
+ */
 class StudentController extends Controller
 {
+     /**
+   * student interface
+   */
+
     private $studentServiceInterface;
 
+    /**
+   * Create a new controller instance.
+   *
+   * @return void
+   */
     public function __construct(StudentServiceInterface $studentServiceInterface){
         $this->studentServiceInterface = $studentServiceInterface;
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   /**
+   * To show  student view
+   * 
+   * @return View student
+   */
     public function index()
     {
         //
@@ -27,11 +45,11 @@ class StudentController extends Controller
         return view('student.index',compact('students'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+     /**
+   * To show create student view
+   * 
+   * @return View create student
+   */
     public function create()
     {
         //
@@ -40,12 +58,11 @@ class StudentController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+   * To submit student create view
+   * @param StudentRequest $request
+   * @return View students list
+   */
+    public function store(StudentRequest $request)
     {
         $this->studentServiceInterface->storeStudent($request);
 
@@ -82,11 +99,11 @@ class StudentController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  StudentRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StudentRequest $request, $id)
     {
         $this->studentServiceInterface->updateStudent($request,$id);
         return redirect('/students')->with('success','You have successfully updated.');
@@ -102,5 +119,36 @@ class StudentController extends Controller
     {
         $this->studentServiceInterface->destroyStudent($id);
         return redirect('/students')->with('success','You have successfully deleted.');
+    }
+
+     /**
+    * @return \Illuminate\Support\Collection
+    *
+     * for import and export view
+    */
+    public function importExportView()
+    {
+       return view('import');
+    }
+   
+    /**
+    * @return \Illuminate\Support\Collection
+    *
+     * export view
+    */
+    public function export() 
+    {
+        return Excel::download(new StudentsExport, 'students.xlsx');
+    }
+   
+    /**
+    * @return \Illuminate\Support\Collection
+    *
+     * import view
+    */
+    public function import(CSVRequest $request) 
+    {
+        Excel::import(new StudentsImport,$request->file('file'));
+        return back();
     }
 }

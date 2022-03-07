@@ -27,4 +27,7 @@ Route::resource('students', 'Student\StudentController');
 //Route::get('student/edit/{id}',[StudentController::class,'edit'])->name('students.edit');
 //Route::put('student/update/{id}',[StudentController::class,'update'])->name('students.update');
 //Route::delete('student/delete/{id}',[StudentController::class,'destroy'])->name('student.destroy');
-
+//
+Route::get('export', [StudentController::class,'export'])->name('export');
+Route::get('importExportView',[StudentController::class,'importExportView'] );
+Route::post('import', [StudentController::class,'import'])->name('import');
