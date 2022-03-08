@@ -10,8 +10,19 @@
     <a href="{{route('students.create')}}" class="btn btn-success my-3">Create</a>
     <a href="{{url('importExportView')}}" class="btn btn-success my-3 ml-auto">Import/Export</a>
 
+
+    <div class="my-4" style="float: right;">
+        <form class="form-inline my-2 my-lg-0" action="{{ url('students') }}" method="GET">
+          @csrf
+              <label for="keyword">Keyword:</label>
+              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="keyword" id="keyword">
+            
+              <button  class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>      
+        </form>
+      </div>
+
   @if(count($students)>0)
-    <table class='table mt-5 table-hover table-bordered'>
+    <table class='table my-5 table-hover table-bordered'>
       <tr class="bg-secondary text-white">
         <th class="col">Id</th>
         <th class="col">First Name</th>
@@ -31,8 +42,8 @@
         <td>{{ $student->email }}</td>
         <td>{{ $student->phone }}</td>
         <td>{{ $student->address }}</td>
-        <td>{{ $student->major_id}}</td>
-        <td>{{$student->created_at->diffForHumans()}}</td>
+        <td>{{ $student->major_name}}</td>
+        <td>{{$student->created_at}}</td>
         <td> 
           <a href="{{ route('students.edit',$student->id) }}" class="btn btn-primary btn-sm me-2">Edit</a>
           <form action="{{ route('students.destroy',$student->id) }}" onsubmit="return confirm('Are you sure to delete?');" method="POST" style="display: inline;">

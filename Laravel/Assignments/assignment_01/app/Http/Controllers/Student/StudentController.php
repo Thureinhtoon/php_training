@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Exports\StudentsExport;
 use App\Imports\StudentsImport;
 use App\Http\Requests\CSVRequest;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Requests\StudentRequest;
@@ -38,11 +39,24 @@ class StudentController extends Controller
    * 
    * @return View student
    */
-    public function index()
+    public function index(Request $request)
     {
         //
-        $students = Student::all();
+        $students =  $this->studentServiceInterface->getStudents($request);
+
         return view('student.index',compact('students'));
+    }
+
+    
+
+    /**
+     * get students list with major
+     */
+    public function getStuList() {
+        return DB::table('students as student')
+        ->join('majors as major', 'student.major_id', '=', 'major.id')
+        ->select('student.*', 'major.name as major')
+        ->orderBy('student.id', 'asc');
     }
 
      /**
