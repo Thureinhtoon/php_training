@@ -11,4 +11,6 @@ interface StudentServiceInterface {
     public function destroyStudent($id);
 
     public function getStudents(Request $request);
+
+    public function studentList();
 }

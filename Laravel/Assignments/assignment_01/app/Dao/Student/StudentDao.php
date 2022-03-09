@@ -51,4 +51,10 @@ class StudentDao implements StudentDaoInterface {
 
         return $students->latest()->get();
     }
+
+    public function studentList(){
+       return DB::table('students as student')
+        ->join('majors as major', 'student.major_id', '=', 'major.id')
+        ->select('student.*', 'major.name as major');
+    }
 }

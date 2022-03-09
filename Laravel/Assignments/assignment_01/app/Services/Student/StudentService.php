@@ -31,4 +31,9 @@ class StudentService implements StudentServiceInterface {
     {
         return $this->studentDaoInterface->getStudents($request);
     }
+
+    public function studentList()
+    {
+        return $this->studentDaoInterface->studentList();
+    }
 }

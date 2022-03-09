@@ -117,7 +117,7 @@ class StudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StudentRequest $request, $id)
+    public function update(Request $request, $id)
     {
         $this->studentServiceInterface->updateStudent($request,$id);
         return redirect('/students')->with('success','You have successfully updated.');
@@ -160,7 +160,7 @@ class StudentController extends Controller
     *
      * import view
     */
-    public function import(CSVRequest $request) 
+    public function import(Request $request) 
     {
         Excel::import(new StudentsImport,$request->file('file'));
         return back();

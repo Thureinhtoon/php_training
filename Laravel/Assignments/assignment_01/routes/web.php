@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Student\StudentAPIController;
 use App\Http\Controllers\Student\StudentController;
 use Illuminate\Support\Facades\Route;
 
@@ -31,3 +32,8 @@ Route::resource('students', 'Student\StudentController');
 Route::get('export', [StudentController::class,'export'])->name('export');
 Route::get('importExportView',[StudentController::class,'importExportView'] );
 Route::post('import', [StudentController::class,'import'])->name('import');
+
+//api route
+Route::get('/ajax/students/' , [StudentAPIController::class, 'showList']);
+Route::get('/ajax/students/create' , [StudentAPIController::class, 'showCreate']);
+Route::get('/ajax/students/{student}/edit' , [StudentAPIController::class, 'showEdit']);
