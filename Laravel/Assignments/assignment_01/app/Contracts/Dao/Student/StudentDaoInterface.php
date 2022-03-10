@@ -13,4 +13,8 @@ interface StudentDaoInterface {
     public function getStudents(Request $request);
 
     public function studentList();
+
+    public function majorCreate();
+
+    public function findStudent($id);
 }

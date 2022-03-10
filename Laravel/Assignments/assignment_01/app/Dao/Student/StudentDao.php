@@ -1,6 +1,7 @@
 <?php 
 namespace App\Dao\Student;
 
+use App\Major;
 use App\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -57,4 +58,17 @@ class StudentDao implements StudentDaoInterface {
         ->join('majors as major', 'student.major_id', '=', 'major.id')
         ->select('student.*', 'major.name as major');
     }
+
+    public function majorCreate()
+    {
+        $majors = Major::all();
+        return $majors;
+    }
+
+    public function findStudent($id)
+    {
+        $student = Student::find($id);
+        return $student;
+    }
+    
 }

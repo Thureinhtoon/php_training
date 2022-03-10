@@ -36,4 +36,12 @@ class StudentService implements StudentServiceInterface {
     {
         return $this->studentDaoInterface->studentList();
     }
+
+    public function majorCreate(){
+        return $this->studentDaoInterface->majorCreate();
+    }
+
+    public function findStudent($id){
+        return $this->studentDaoInterface->findStudent($id);
+    }
 }

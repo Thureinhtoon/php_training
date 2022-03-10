@@ -47,17 +47,6 @@ class StudentController extends Controller
         return view('student.index',compact('students'));
     }
 
-    
-
-    /**
-     * get students list with major
-     */
-    public function getStuList() {
-        return DB::table('students as student')
-        ->join('majors as major', 'student.major_id', '=', 'major.id')
-        ->select('student.*', 'major.name as major')
-        ->orderBy('student.id', 'asc');
-    }
 
      /**
    * To show create student view
@@ -66,9 +55,17 @@ class StudentController extends Controller
    */
     public function create()
     {
-        //
-        $majors = Major::all();
+        $majors = $this->studentServiceInterface->majorCreate();
         return view('student.create',compact('majors'));
+    }
+
+     /**
+   * To  create major
+   * 
+   */
+    public function majorCreate()
+    {
+        return $this->studentServiceInterface->majorCreate();
     }
 
     /**
@@ -91,8 +88,7 @@ class StudentController extends Controller
      */
     public function show($id)
     {
-        //
-        $student = Student::find($id);
+        $student = $this->studentServiceInterface->findStudent($id);
         return view('student.index',compact('student'));
     }
 
@@ -104,9 +100,8 @@ class StudentController extends Controller
      */
     public function edit($id)
     {
-        //
-        $student = Student::find($id);
-        $majors = Major::all();
+        $student = $this->studentServiceInterface->findStudent($id);
+        $majors = $this->studentServiceInterface->majorCreate();
         return view('student.edit',compact('student','majors'));
     }
 

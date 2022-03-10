@@ -45,10 +45,10 @@ class StudentAPIController extends Controller
         return view('api.student.edit');
     }
 
-    public function getMajors() {
-        $majors = Major::all();
-        return $majors;
-    }
+    //public function getMajors() {
+    //    $majors = Major::all();
+    //    return $majors;
+    //}
 
     /**
      * Display a listing of the resource.
@@ -57,11 +57,6 @@ class StudentAPIController extends Controller
      */
     public function index()
     {
-        
-        //return DB::table('students as student')
-        //->join('majors as major', 'student.major_id', '=', 'major.id')
-        //->select('student.*', 'major.name as major')
-        //->get();
         return $this->studentServiceInterface->studentList()->get();
     }
 
@@ -75,6 +70,7 @@ class StudentAPIController extends Controller
     {
         
         $this->studentServiceInterface->storeStudent($request);
+        return "inserted successfully!";
     }
 
     /**
@@ -85,8 +81,7 @@ class StudentAPIController extends Controller
      */
     public function show($id)
     {
-        //
-        $student = Student::find($id);
+        $student = $this->studentServiceInterface->findStudent($id);
         return $student;
     }
 
@@ -99,7 +94,14 @@ class StudentAPIController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->studentServiceInterface->updateStudent($request, $id);
+       $student = $this->studentServiceInterface->updateStudent($request, $id);
+
+        // Check student is updated successfully or not
+        if ($student) {
+            return 'Student updated successfully';
+        } else {
+            return 'Something went wrong. Please try again!';
+        }
     }
 
     /**
@@ -112,6 +114,7 @@ class StudentAPIController extends Controller
     {
         //
         $this->studentServiceInterface->destroyStudent($id);
+        return "deleted successfully!";
         
     }
 }

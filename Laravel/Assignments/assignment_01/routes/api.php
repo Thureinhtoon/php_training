@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\Student\StudentAPIController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Student\StudentController;
+use App\Http\Controllers\Student\StudentAPIController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,4 +25,5 @@ Route::apiResource('apistudents','Student\StudentAPIController');
 //Route::get('apistudents/majorsList', 'Student\StudentAPIController@getMajors');
 
 // major list api route
-Route::get('majors', [StudentAPIController::class, 'getMajors']);
+//Route::get('majors', [StudentAPIController::class, 'getMajors']);
+Route::get('majors', [StudentController::class, 'majorCreate']);
