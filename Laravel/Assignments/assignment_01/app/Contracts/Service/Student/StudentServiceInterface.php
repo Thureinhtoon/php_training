@@ -17,4 +17,8 @@ interface StudentServiceInterface {
     public function majorCreate();
 
     public function findStudent($id);
+
+    public function sendCreateMail($email);
+
+    public function sendDeleteMail($email);
 }

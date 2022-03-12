@@ -77,6 +77,8 @@ class StudentController extends Controller
     {
         $this->studentServiceInterface->storeStudent($request);
 
+        $this->studentServiceInterface->sendCreateMail($request->email);
+
         return redirect('/students')->with('success', 'You have successfully created');
     }
 
@@ -126,7 +128,9 @@ class StudentController extends Controller
      */
     public function destroy($id)
     {
+        $student = $this->studentServiceInterface->findStudent($id);
         $this->studentServiceInterface->destroyStudent($id);
+        $this->studentServiceInterface->sendDeleteMail($student->email);
         return redirect('/students')->with('success','You have successfully deleted.');
     }
 

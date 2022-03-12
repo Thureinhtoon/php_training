@@ -3,6 +3,7 @@
 namespace App\Services\Student;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use App\Contracts\Dao\Student\StudentDaoInterface;
 use App\Contracts\Service\Student\StudentServiceInterface;
 
@@ -43,5 +44,25 @@ class StudentService implements StudentServiceInterface {
 
     public function findStudent($id){
         return $this->studentDaoInterface->findStudent($id);
+    }
+
+    public function sendCreateMail($email)
+    {
+        $details = [
+                    'title' => 'Mail from BIB Company',
+                    'body' => 'Your data is created successfully'
+                ];
+               
+                Mail::to("$email")->send(new \App\Mail\CreateMail($details));
+    }
+
+    public function sendDeleteMail($email)
+    {
+        $details = [
+            'title' => 'Mail from BIB Company',
+            'body' => 'Your data is deleted successfully'
+        ];
+       
+        Mail::to("$email")->send(new \App\Mail\DeleteMail($details));
     }
 }

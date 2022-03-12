@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\Student\StudentAPIController;
-use App\Http\Controllers\Student\StudentController;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Student\StudentController;
+use App\Http\Controllers\Student\StudentAPIController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,3 +38,16 @@ Route::post('import', [StudentController::class,'import'])->name('import');
 Route::get('/ajax/students/' , [StudentAPIController::class, 'showList']);
 Route::get('/ajax/students/create' , [StudentAPIController::class, 'showCreate']);
 Route::get('/ajax/students/{student}/edit' , [StudentAPIController::class, 'showEdit']);
+
+//mail
+//Route::get('send-mail', function () {
+//   
+//    $details = [
+//        'title' => 'Mail from ItSolutionStuff.com',
+//        'body' => 'This is for testing email using smtp'
+//    ];
+//   
+//    Mail::to('thureinhtun2499@gmail.com')->send(new \App\Mail\CreateMail($details));
+//   
+//    dd("Email is Sent.");
+//});
